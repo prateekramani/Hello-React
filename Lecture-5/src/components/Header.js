@@ -3,10 +3,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img
-          className="logo"
-          src={logo_url}
-        ></img>
+        <img className="logo" src={logo_url}></img>
       </div>
       <div className="nav-items">
         <ul>
@@ -20,5 +17,4 @@ const Header = () => {
   );
 };
 
-
-export default Header
+export default Header;
