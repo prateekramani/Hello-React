@@ -2,6 +2,7 @@ import resList from "../utils/mockData";
 import RestrauntCard from "./RestrauntCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // const [restraunts, setRestraunts] = useState(resList);
@@ -26,7 +27,7 @@ const Body = () => {
   useEffect(() => {
     console.log("calling fetch data")
     fetchData();
-  }, []);
+  },[]);
 
   // if (restraunts.length == 0) {
   // return <h1>Loading ...</h1>
@@ -62,7 +63,9 @@ const Body = () => {
           <Shimmer />
         ) : (
           filteredRestraunts.map((restraunt, index) => (
-            <RestrauntCard key={restraunt.info.id} resData={restraunt} />
+            <Link to={"/restaurants/" + restraunt.info.id} key={restraunt.info.id}>
+              <RestrauntCard  resData={restraunt} />
+            </Link> 
           ))
         )}
       </div>

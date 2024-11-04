@@ -75,9 +75,9 @@
     height: 300px
 }
 
-.app {
+/* .app {
     background-color: rgb(51, 58, 66)
-}
+} */
 
 .login {
     padding: 0 20px;
@@ -87,4 +87,4 @@
     display: flex;
 }
 
-.search-box {}
+.search-box {} 
