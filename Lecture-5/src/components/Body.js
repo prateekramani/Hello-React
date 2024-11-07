@@ -3,6 +3,7 @@ import RestrauntCard from "./RestrauntCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // const [restraunts, setRestraunts] = useState(resList);
@@ -28,6 +29,12 @@ const Body = () => {
     console.log("calling fetch data")
     fetchData();
   },[]);
+
+  // since we applied only at Body level, offline functionality will come only on Body Component
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus == false) {
+    return <h1> Internet not available. Please check your Internet Connection. </h1>
+  }
 
   // if (restraunts.length == 0) {
   // return <h1>Loading ...</h1>

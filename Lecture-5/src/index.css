@@ -91,4 +91,8 @@
     border:  2px solid black;
 }
 
+li {
+    color: black;
+}
+
 .search-box {} 
