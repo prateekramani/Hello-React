@@ -39,11 +39,11 @@ const Body = () => {
   // if (restraunts.length == 0) {
   // return <h1>Loading ...</h1>
   return (
-    <div>
+    <div >
       <div className="filter">
-        <div className="search">
-            <input type="text" className = "search-box" value= {searchText} onChange={(e)=>{setSearchText(e.target.value)}}></input>
-            <button onClick = {()=>{
+        <div className="search mx-2 px-2">
+            <input type="text" className = "search-box border-2 border-grey-100 hover:drop-shadow-lg" value= {searchText} onChange={(e)=>{setSearchText(e.target.value)}}></input>
+            <button className="m-4 h-9 px-4 bg-slate-200 hover:drop-shadow-lg rounded-lg" onClick = {()=>{
               const filteredRestraunt =  restraunts.filter(res =>{
                 return res.info.name.toLowerCase().includes(searchText.toLowerCase())
               })
@@ -52,12 +52,12 @@ const Body = () => {
               Search
             </button>    
         <button
-          className="filter-btn"
+          className="filter-btn h-9 m-4 px-4 bg-slate-200 hover:drop-shadow-lg rounded-lg"
           onClick={() => {
             const filterRestraunt = restraunts.filter((restraunt) => {
               return restraunt.info.avgRating > 4.5;
             });
-            setRestraunts(filterRestraunt);
+            setFilteredRestraunts(filterRestraunt);
           }}
         >
           Top Rated Restaurants
@@ -65,7 +65,7 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {restraunts.length == 0 ? (
           <Shimmer />
         ) : (
@@ -74,7 +74,8 @@ const Body = () => {
               <RestrauntCard  resData={restraunt} />
             </Link> 
           ))
-        )}
+        )
+        }
       </div>
     </div>
   );
