@@ -1,9 +1,11 @@
 import resList from "../utils/mockData";
-import RestrauntCard from "./RestrauntCard";
+import RestrauntCard, { withPromotedLabel } from "./RestrauntCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // const [restraunts, setRestraunts] = useState(resList);
@@ -11,6 +13,11 @@ const Body = () => {
   const [restraunts, setRestraunts] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchText , setSearchText] = useState("")
+
+  const RestrauntCardPromoted = withPromotedLabel(RestrauntCard)
+
+  const {loggedInUser, setUserName} = useContext(UserContext)
+
   console.log("Body rendered")
   const fetchData = async () => {
     console.log("fetch data function is being called")
@@ -55,13 +62,14 @@ const Body = () => {
           className="filter-btn h-9 m-4 px-4 bg-slate-200 hover:drop-shadow-lg rounded-lg"
           onClick={() => {
             const filterRestraunt = restraunts.filter((restraunt) => {
-              return restraunt.info.avgRating > 4.5;
+              return restraunt.info.avgRating >= 4.5;
             });
             setFilteredRestraunts(filterRestraunt);
           }}
         >
           Top Rated Restaurants
         </button>
+        <input type="text" className = "search-box border-2 border-grey-100 hover:drop-shadow-lg" value={loggedInUser} onChange={(e)=> setUserName(e.target.value)} ></input>
         </div>
       </div>
 
@@ -71,7 +79,8 @@ const Body = () => {
         ) : (
           filteredRestraunts.map((restraunt, index) => (
             <Link to={"/restaurants/" + restraunt.info.id} key={restraunt.info.id}>
-              <RestrauntCard  resData={restraunt} />
+              {restraunt.info.id % 2 != 0 ? <RestrauntCardPromoted resData={restraunt} /> :  <RestrauntCard  resData={restraunt} />}
+             
             </Link> 
           ))
         )

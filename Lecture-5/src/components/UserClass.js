@@ -1,6 +1,7 @@
 
 import React from "react"
 import { useState } from "react"
+import UserContext from "../utils/UserContext"
 
 class UserClass extends React.Component {
 
@@ -54,6 +55,10 @@ class UserClass extends React.Component {
                 <h2>Github Location : {location}</h2>
                 <h4>Count2 : {this.state.count2}</h4>
                 <h4>Count : {this.state.count}</h4>
+                {/* using context in class based component */}
+                <UserContext.Consumer> 
+                    {(data) => <h4>User Context {data.loggedInUser}</h4>} 
+                </UserContext.Consumer>
                 <button onClick={()=>{
                     this.setState({
                         count : this.state.count +=1,
